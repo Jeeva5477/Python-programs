@@ -1,0 +1,69 @@
+import re
+
+# Function to add two numbers
+def add(x, y):
+    return x + y
+
+# Function to subtract two numbers
+def subtract(x, y):
+    return x - y
+
+# Function to multiply two numbers
+def multiply(x, y):
+    return x * y
+
+# Function to divide two numbers
+def divide(x, y):
+    if y == 0:
+        return "Cannot divide by zero!"
+    else:
+        return x / y
+
+# Function to evaluate arithmetic expression
+def evaluate_expression(expression):
+    try:
+        # Check if the expression is valid
+        if re.match(r'^[\d\+\-\*/\.\s]+$', expression):
+            return eval(expression)
+        else:
+            raise ValueError("Invalid expression")
+    except Exception as e:
+        print(f"Error evaluating expression: {e}")
+        return None
+
+# Main program loop
+while True:
+    print("Select operation:")
+    print("1. Add")
+    print("2. Subtract")
+    print("3. Multiply")
+    print("4. Divide")
+    print("5. Exit")
+
+    choice = input("Enter choice (1/2/3/4/5): ")
+
+    if choice == '5':
+        print("Exiting calculator.")
+        break
+
+    if choice in ('1', '2', '3', '4'):
+        expression1 = input("Enter first number or expression: ")
+        num1 = evaluate_expression(expression1)
+        if num1 is None:
+            continue
+
+        expression2 = input("Enter second number or expression: ")
+        num2 = evaluate_expression(expression2)
+        if num2 is None:
+            continue
+
+        if choice == '1':
+            print(f"{num1} + {num2} = {add(num1, num2)}")
+        elif choice == '2':
+            print(f"{num1} - {num2} = {subtract(num1, num2)}")
+        elif choice == '3':
+            print(f"{num1} * {num2} = {multiply(num1, num2)}")
+        elif choice == '4':
+            print(f"{num1} / {num2} = {divide(num1, num2)}")
+    else:
+        print("Invalid input. Please enter a valid number (1/2/3/4/5).")
